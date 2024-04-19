@@ -15,20 +15,31 @@ def separator(cpf_param: str, limit: int) -> list[int]:
     if (index == limit):
       return cpf_list
     
-
 def calculate(cpf_param: str):
-  count = 10
-  accumulator = 0
-  first_list = separator(cpf_param, 8)
-  # lasst_list = separator(cpf_param, 9)
+  first_list = {
+    "count": 10,
+    "accumulator": 0,
+    "list": separator(cpf_param, 8)
+  }
 
-  for digit in enumerate(first_list):
-    accumulator += digit[1] * count
-    count -= 1
+  last_list = {
+    "count": 11,
+    "accumulator": 0,
+    "list": separator(cpf_param, 9)
+  }
+
+  for digit in enumerate(first_list["list"]):
+    first_list["accumulator"] += digit[1] * first_list["count"]
+    first_list["count"] -= 1
+
+  for digit in enumerate(last_list["list"]):
+    last_list["accumulator"] += digit[1] * last_list["count"]
+    last_list["count"] -= 1
   
-  accumulator = (accumulator * 10) % 11
+  first_list["accumulator"] = (first_list["accumulator"] * 10) % 11
+  last_list["accumulator"] = (last_list["accumulator"] * 10) % 11
 
-  return accumulator
+  return [first_list["accumulator"], last_list["accumulator"]]
 
 def execute():
   cpf_input = input("Informe o cpf: ")
@@ -36,12 +47,9 @@ def execute():
   
   if(cpf_validated):
     result = calculate(cpf_validated)
-    print(result)
+    print(f'Cpf é válido! \nPrimeiro dígito: {result[0]} \nSegundo dígito: {result[1]}')
   else:
     print("Insira um cpf válido!")
 
 
 execute()
-
-# cpf -> "529982247-25"
-
