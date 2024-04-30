@@ -45,11 +45,16 @@ def execute():
   cpf_input = input("Informe o cpf: ")
   cpf_validated = validate(cpf_input)
   
-  if(cpf_validated):
+  if(cpf_validated != None):
     result = calculate(cpf_validated)
-    print(f'Cpf é válido! \nPrimeiro dígito: {result[0]} \nSegundo dígito: {result[1]}')
+
+    if(result[0] == int(cpf_input[len(cpf_input) -2]) and result[1] == int(cpf_input[len(cpf_input) -1])):
+      print(f'Este número é válido para CPF! \nPrimeiro dígito: {result[0]} \nSegundo dígito: {result[1]}')
+    else:
+      print("Este não é um número válido para CPF!")
+
   else:
-    print("Insira um cpf válido!")
+    print("Sorry :( seu número não passou na validação, tente outro.)")
 
 
 execute()
