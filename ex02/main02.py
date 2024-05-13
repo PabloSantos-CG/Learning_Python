@@ -1,15 +1,12 @@
+from typing import Tuple
 
-def count_letters():
-  RECEIVED = input("Informe a palavra:");
-  uppercase = [key for key in RECEIVED if key == key.upper()];
-  lowercase = [key for key in RECEIVED if key != key.upper()];
-  return (len(uppercase), len(lowercase));
+def create_team(team_name: str, *players: Tuple[str]):
+  return { "Name": team_name, "Players": players }
 
-print(count_letters());
+def execute():
+  teams = []
+  new_teams = create_team(22, "Mike", "Tyson Jr.", "Brand Jr.")
+  teams.append(new_teams)
+  print(teams)
 
-def count_oddAndPair(*args):
-  pair = [k for k in args if k % 2 == 0];
-  odd = [k for k in args if k % 2 != 0];
-  return f"Existem {len(pair)} números pares e existem {len(odd)} ímpares";
-
-print(count_oddAndPair(21920,92,12,2,24,3,553,3,63,73,73,3,3,3,3));
+execute()
